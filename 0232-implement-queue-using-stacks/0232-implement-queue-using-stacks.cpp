@@ -13,8 +13,8 @@ public:
                 out.pop();
             }
         }
-
         in.push(x);
+        if (in.size() == 1) front = x;
     }
 
     int pop() {
@@ -28,26 +28,19 @@ public:
         }
         int num = out.top();
         out.pop();
+        if (!out.empty()) front = out.top();
         return num;
     }
 
     int peek() {
-        if (out.empty())
-        {
-            while (!in.empty())
-            {
-                out.push(in.top());
-                in.pop();
-            }
-        }
-        int num = out.top();
-        return num;
+        return front;
     }
 
     bool empty() {
         return in.empty() && out.empty();
     }
 
+    int front;
     stack<int> in;
     stack<int> out;
 };
